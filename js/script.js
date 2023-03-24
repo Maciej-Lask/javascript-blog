@@ -127,12 +127,12 @@ function tagClickHandler(event) {
   /* END LOOP: for each active tag link */
 
   /* find all tag links with "href" attribute equal to the "href" constant */
-  const emptyTags = document.querySelectorAll('a[href="' + href + '"]');
+  const linksToTags = document.querySelectorAll('a[href="' + href + '"]');
 
   /* START LOOP: for each found tag link */
-  for (let emptyTag of emptyTags) {
+  for (let linkToTag of linksToTags) {
     /* add class active */
-    emptyTag.classList.add('active');
+    linkToTag.classList.add('active');
   }
   /* END LOOP: for each found tag link */
 
@@ -183,10 +183,10 @@ function authorClickHandler(event) {
     activeAuthor.classList.remove('active');
     console.log('Removed active class from author');
   }
-  const emptyAuthors = document.querySelectorAll('a[href="' + hrefAuthor + '"]');
+  const linkAuthors = document.querySelectorAll('a[href="' + hrefAuthor + '"]');
 
-  for (let emptyAuthor of emptyAuthors) {
-    emptyAuthor.classList.add('active');
+  for (let linkAuthor of linkAuthors) {
+    linkAuthor.classList.add('active');
     console.log('Addend active class to author');
   }
   //generateTitleLinks('[data-authors="' + author + '"]');
