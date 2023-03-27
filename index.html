@@ -231,7 +231,23 @@
             </main>
         </div>
     </div>
+    <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <!-- Article-template -->
+    <script id="template-article-link" type="text/x-handlebars-template">
+        <li><a href="#{{ id }}"><span>{{ title }}</span></a></li>
+    </script>
+    <!-- Tag-template -->
+    <script id="template-tag-link" type="text/x-handlebars-template">
+        <li><a href="#tag-{{ tag }}"><p>{{ tag }}</p></a></li>
+    </script>
+    <!-- Author-template -->
+    <script id="template-author-link" type="text/x-handlebars-template">
+        <a href="#author-{{ articleAuthor }}"><p> {{ articleAuthor }} </p></a>
+    </script>
+    <!-- Handlebars -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
+    <!-- JS -->
     <script src="js/script.js"></script>
 </body>
 </html>

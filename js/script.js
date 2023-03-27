@@ -1,3 +1,8 @@
+const templates = {
+  articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
+  tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML),
+  authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML)
+};
 const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles',
@@ -11,17 +16,11 @@ const optArticleSelector = '.post',
 const titleClickHandler = function (event) {
   event.preventDefault();
   const clickedElement = this;
-  //console.log('Link was clicked!');
-  //console.log(event);
-  /* remove class 'active' from all article links  [DONE]*/
   const activeLinks = document.querySelectorAll('.titles a.active');
 
   for (let activeLink of activeLinks) {
     activeLink.classList.remove('active');
   }
-  /* add class 'active' to the clicked link Work in progress*/
-  //console.log('clickedElement:', clickedElement);
-  /* remove class 'active' from all articles [DONE] */
   const activeArticles = document.querySelectorAll('.posts article.active');
   clickedElement.classList.add('active');
   for (let activeArticle of activeArticles) {
@@ -44,9 +43,6 @@ function generateTitleLinks(customSelector = '') {
 
   /* find all the articles and save them to variable: articles */
   const articles = document.querySelectorAll(optArticleSelector + customSelector);
-  //console.log(customSelector);
-  //console.log(optArticleSelector);
-  /* for each article */
 
   let html = '';
 
@@ -58,7 +54,9 @@ function generateTitleLinks(customSelector = '') {
     const articleTitle = article.querySelector(optTitleSelector).innerHTML;
 
     /* create HTML of the link */
-    const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+    //const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+    const linkHTMLData = { id: articleId, title: articleTitle };
+    const linkHTML = templates.articleLink(linkHTMLData);
     //console.log(linkHTML);
     /* insert link into html variable */
     html = html + linkHTML;
@@ -124,7 +122,11 @@ function generateTags() {
     for (let tag of articleTagsArray) {
       //console.log(tag);
       /* generate HTML of the link */
-      const tagHTML = '<li><a href="#tag-' + tag + '"><p>' + tag + '</p></a></li>';
+      //const tagHTML = '<li><a href="#tag-' + tag + '"><p>' + tag + '</p></a></li>';
+
+      const tagHTMLData = { tag: tag };
+      const tagHTML = templates.tagLink(tagHTMLData);
+
       /* add generated code to HTML variable */
       html = html + tagHTML;
       /* [NEW] check if this link is NOT already in allTags */
@@ -222,9 +224,11 @@ function generateAuthors() {
     const author = article.querySelector(optArticleAuthorSelector);
     /* get Author from data-author attribute */
     const articleAuthor = article.getAttribute('data-author');
+    //stare przypisanie html
+    //author.innerHTML = '<a href="#author-' + articleAuthor + '"><p>' + articleAuthor + ' </p></a>';
 
-    author.innerHTML = '<a href="#author-' + articleAuthor + '"><p>' + articleAuthor + ' </p></a>';
-
+    const AuthorHTMLData = { articleAuthor: articleAuthor };
+    author.innerHTML = templates.authorLink(AuthorHTMLData);
     if (!allAuthors[articleAuthor]) {
       allAuthors[articleAuthor] = 1;
     } else {
